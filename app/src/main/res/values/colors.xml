@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="playButtonPlayColor">#9CDBA6</color> <!-- Red color for pressed state -->
+    <color name="playButtonPauseColor">#FFA823</color> <!-- Green color for original state -->
+    <color name="resetButtonColor">#DED0B6</color> <!-- Green color for original state -->
+    <color name="resetButtonColorDim">#222831</color> <!-- Green color for original state -->
+</resources>
