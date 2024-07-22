@@ -2,6 +2,7 @@ package com.example.meditationhelper;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.os.Build;
 import android.os.PowerManager;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Handler;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
@@ -66,6 +68,15 @@ public class MainActivity extends AppCompatActivity implements LifecycleObserver
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            if (!pm.isIgnoringBatteryOptimizations(getPackageName())) {
+//                Toast.makeText(this, "Some features might benefit from disabling battery optimization. Go to Settings > Battery > (More apps) > All Apps and find this app to adjust its settings.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                startActivity(intent);
+            }
+        }
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -89,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements LifecycleObserver
                 startStopwatch();
             }
         });
+
 
         getLifecycle().addObserver(this);
         resetButton.setOnClickListener(v -> resetStopwatch());
